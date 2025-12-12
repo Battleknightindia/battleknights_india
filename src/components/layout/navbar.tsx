@@ -11,15 +11,53 @@ import { navlinks } from "@/lib/constants/navlinks";
 
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
+    const [activeSection, setActiveSection] = useState("");
 
     // Scroll effect for "Floating Glass" look
     useEffect(() => {
         const handleScroll = () => {
             setScrolled(window.scrollY > 20);
+
+            // Update active section based on scroll position
+            const sections = navlinks.map(link => link.id);
+            const scrollPosition = window.scrollY + 100; // Offset for navbar
+
+            for (const sectionId of sections) {
+                const element = document.getElementById(sectionId);
+                if (element) {
+                    const { offsetTop, offsetHeight } = element;
+                    if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+                        setActiveSection(sectionId);
+                        break;
+                    }
+                }
+            }
         };
+
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
+
+    // Smooth scroll function
+    const scrollToSection = (id: string) => {
+        const element = document.getElementById(id);
+        if (element) {
+            const navbarHeight = 80; // Adjust based on your navbar height
+            const elementPosition = element.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth"
+            });
+        }
+    };
+
+    // Handle link click
+    const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+        e.preventDefault();
+        scrollToSection(id);
+    };
 
     return (
         <header
@@ -49,16 +87,22 @@ export default function Navbar() {
                 {/* Desktop Navigation */}
                 <nav className="hidden md:flex items-center gap-1 bg-zinc-900/50 backdrop-blur-sm px-2 py-1.5 rounded-full border border-zinc-800/50">
                     {navlinks.map((link) => (
-                        <Link
+                        <a
                             key={link.id}
-                            href={link.href}
+                            href={`#${link.id}`}
+                            onClick={(e) => handleLinkClick(e, link.id)}
                             className={cn(
-                                "relative px-4 py-2 text-sm font-medium rounded-full transition-all duration-200",
-                                "text-zinc-400 hover:text-white hover:bg-zinc-800",
+                                "relative px-4 py-2 text-sm font-medium rounded-full transition-all duration-200 cursor-pointer",
+                                activeSection === link.id
+                                    ? "text-white bg-emerald-600/20 border border-emerald-500/30"
+                                    : "text-zinc-400 hover:text-white hover:bg-zinc-800",
                             )}
                         >
                             {link.label}
-                        </Link>
+                            {activeSection === link.id && (
+                                <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-emerald-400 rounded-full"></span>
+                            )}
+                        </a>
                     ))}
                 </nav>
 
@@ -109,16 +153,24 @@ export default function Navbar() {
                                     <nav className="flex flex-col space-y-2">
                                         {navlinks.map((link, index) => (
                                             <SheetClose key={link.id} asChild>
-                                                <Link
+                                                <a
                                                     href={`#${link.id}`}
-                                                    key={index}
-                                                    className="group flex items-center justify-between p-4 rounded-xl text-2xl font-bold text-zinc-400 hover:text-white hover:bg-zinc-900/50 border border-transparent hover:border-zinc-800 transition-all"
+                                                    onClick={(e) => {
+                                                        e.preventDefault();
+                                                        scrollToSection(link.id);
+                                                    }}
+                                                    className={cn(
+                                                        "group flex items-center justify-between p-4 rounded-xl text-2xl font-bold border border-transparent transition-all cursor-pointer",
+                                                        activeSection === link.id
+                                                            ? "text-white bg-emerald-900/20 border-emerald-500/30"
+                                                            : "text-zinc-400 hover:text-white hover:bg-zinc-900/50 hover:border-zinc-800"
+                                                    )}
                                                 >
                                                     <span className="group-hover:translate-x-2 transition-transform">
                                                         {link.label}
                                                     </span>
                                                     <ChevronRight className="w-5 h-5 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all text-emerald-500" />
-                                                </Link>
+                                                </a>
                                             </SheetClose>
                                         ))}
                                     </nav>
@@ -143,12 +195,16 @@ export default function Navbar() {
                                 {/* Footer Actions */}
                                 <div className="p-6 border-t border-zinc-800/50 bg-zinc-900/30 backdrop-blur-md">
                                     <div className="grid grid-cols-2 gap-4">
-                                        <Button variant="outline" className="w-full border-zinc-700 text-zinc-200 hover:bg-zinc-800 hover:text-white">
-                                            Login
-                                        </Button>
-                                        <Button className="w-full bg-white text-black hover:bg-zinc-200">
-                                            Sign Up
-                                        </Button>
+                                        <Link href="/auth/login" className="w-full">
+                                            <Button variant="outline" className="w-full border-zinc-700 text-zinc-200 hover:bg-zinc-800 hover:text-white">
+                                                Login
+                                            </Button>
+                                        </Link>
+                                        <Link href="/auth/signup" className="w-full">
+                                            <Button className="w-full bg-white text-black hover:bg-zinc-200">
+                                                Sign Up
+                                            </Button>
+                                        </Link>
                                     </div>
                                 </div>
 

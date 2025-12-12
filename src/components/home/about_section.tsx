@@ -6,7 +6,7 @@ import { Target, Globe, Trophy, Zap } from "lucide-react";
 
 const AboutSection = () => {
     return (
-        <section className="relative bg-zinc-950 py-16 md:py-24 overflow-hidden border-t border-zinc-900">
+        <section id="about-us" className="relative bg-zinc-950 py-16 md:py-24 overflow-hidden border-t border-zinc-900">
 
             {/* Ambient Background Glow */}
             <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[500px] h-[500px] bg-emerald-500/5 blur-[120px] rounded-full pointer-events-none" />

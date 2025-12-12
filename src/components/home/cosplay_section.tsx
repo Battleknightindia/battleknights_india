@@ -12,13 +12,9 @@ interface CosplayItem {
 // Mock Data (Replace with props if dynamic)
 const MOCK_COSPLAY_DATA: CosplayItem[] = [
     { id: "c1", image_url: "/cosplay/cosplay1.webp" },
-    { id: "c2", image_url: "/cosplay/cosplay1.webp" },
-    { id: "c3", image_url: "/cosplay/cosplay1.webp" },
-    { id: "c4", image_url: "/cosplay/cosplay1.webp" },
-    { id: "c5", image_url: "/cosplay/cosplay1.webp" },
-    { id: "c6", image_url: "/cosplay/cosplay1.webp" },
-    { id: "c7", image_url: "/cosplay/cosplay1.webp" },
-    { id: "c8", image_url: "/cosplay/cosplay1.webp" },
+    { id: "c2", image_url: "/cosplay/cosplay2.webp" },
+    { id: "c3", image_url: "/cosplay/cosplay7.png" },
+    { id: "c5", image_url: "/cosplay/cosplay6.webp" },
 ];
 
 type Props = {
@@ -31,7 +27,7 @@ export default function CosplaySection({ cosplayData = MOCK_COSPLAY_DATA }: Prop
     const marqueeItems = [...items, ...items, ...items, ...items];
 
     return (
-        <section className="w-full bg-zinc-950 py-24 overflow-hidden border-t border-zinc-900">
+        <section id="cosplay-gallery" className="w-full bg-zinc-950 py-24 overflow-hidden border-t border-zinc-900">
 
             {/* Header / Context */}
             <div className="container mx-auto px-4 lg:px-6 mb-12 flex items-end justify-between">

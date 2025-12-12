@@ -6,7 +6,7 @@ import { Button } from "../ui/button";
 export default function HeroSection() {
 
     return (
-        <div className="relative bg-zinc-950 selection:bg-emerald-500/30">
+        <div id="hero" className="relative bg-zinc-950 selection:bg-emerald-500/30">
             {/* Hero Section */}
             <section
                 className="relative min-h-[90vh] flex flex-col items-center justify-center overflow-hidden"
@@ -44,14 +44,15 @@ export default function HeroSection() {
                         Gather your squad, prove your skills, and fight for the <span className="text-emerald-400">national championship</span>.
                     </p>
 
-                    {/* CTA Buttons */}
-                    <div className="flex flex-col sm:flex-row items-center gap-4 w-full justify-center mb-16 px-4">
-                        <Button className="w-full sm:w-auto h-14 px-10 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-base sm:text-lg shadow-[0_0_30px_rgba(16,185,129,0.3)] transition-all hover:scale-105 active:scale-[0.98]">
-                            Start Your Journey <ArrowRight className="ml-2 w-5 h-5" />
-                        </Button>
-                        <Button variant="outline" className="w-full sm:w-auto h-14 px-8 rounded-full border-zinc-700 bg-zinc-900/50 text-zinc-300 font-bold text-base sm:text-lg hover:border-white/50 hover:bg-zinc-800 hover:text-white transition-all">
-                            <PlayCircle className="mr-2 w-5 h-5" /> Watch Trailer
-                        </Button>
+                    {/* Season 2 Hype Badge (Replaced Buttons) */}
+                    <div className="mb-16 animate-fade-in">
+                        <div className="inline-flex flex-col items-center gap-2 px-8 py-6 rounded-2xl bg-zinc-900/50 border border-zinc-800 backdrop-blur-md relative overflow-hidden group hover:border-emerald-500/30 transition-all duration-500">
+                            <div className="absolute inset-0 bg-linear-to-r from-emerald-500/10 via-transparent to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                            <span className="text-sm font-bold text-emerald-500 uppercase tracking-[0.2em]">Next Chapter</span>
+                            <span className="text-3xl md:text-4xl font-black text-white tracking-tighter">
+                                SEASON 2 <span className="text-zinc-600">INCOMING</span>
+                            </span>
+                        </div>
                     </div>
 
                     {/* Trust Signals / Stats Row */}
@@ -79,17 +80,17 @@ export default function HeroSection() {
                                 <Shield className="w-5 h-5" />
                             </div>
                             <div>
-                                <p className="text-2xl font-bold text-white tabular-nums">50+</p>
-                                <p className="text-xs text-zinc-500 uppercase tracking-widest font-bold">Universities</p>
+                                <p className="text-2xl font-bold text-white tabular-nums">Pan-India</p>
+                                <p className="text-xs text-zinc-500 uppercase tracking-widest font-bold">Coverage</p>
                             </div>
                         </div>
                         <div className="flex flex-col items-center gap-2">
                             <div className="p-3 rounded-2xl bg-zinc-900/50 border border-zinc-800 text-amber-500 mb-1">
-                                <span className="font-black text-lg leading-none">S5</span>
+                                <span className="font-black text-lg leading-none">S1</span>
                             </div>
                             <div>
-                                <p className="text-2xl font-bold text-white uppercase">Open</p>
-                                <p className="text-xs text-zinc-500 uppercase tracking-widest font-bold">Registration</p>
+                                <p className="text-2xl font-bold text-white uppercase">Completed</p>
+                                <p className="text-xs text-zinc-500 uppercase tracking-widest font-bold">Tournament</p>
                             </div>
                         </div>
                     </div>
