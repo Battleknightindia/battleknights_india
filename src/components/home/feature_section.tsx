@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Calendar, MapPin, ArrowRight, PlayCircle, Trophy, Users, Swords, CircleDot } from "lucide-react";
+import { Calendar, MapPin, CircleDot } from "lucide-react";
 import Image from "next/image";
 
 const FeaturedSection = () => {

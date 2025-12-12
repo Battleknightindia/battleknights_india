@@ -1,7 +1,6 @@
 'use client';
 
-import { ChevronDown, Trophy, Users, Shield, ArrowRight, PlayCircle } from "lucide-react";
-import { Button } from "../ui/button";
+import { ChevronDown, Trophy, Users, Shield } from "lucide-react";
 
 export default function HeroSection() {
 

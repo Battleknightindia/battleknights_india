@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Trophy, Crown, Medal, User } from "lucide-react";
+import { Trophy } from "lucide-react";
 import Image from "next/image";
 
 const NccWinnerSection = () => {

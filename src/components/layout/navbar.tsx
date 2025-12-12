@@ -151,7 +151,7 @@ export default function Navbar() {
                                 {/* Links */}
                                 <div className="flex-1 overflow-y-auto py-8 px-6">
                                     <nav className="flex flex-col space-y-2">
-                                        {navlinks.map((link, index) => (
+                                        {navlinks.map((link) => (
                                             <SheetClose key={link.id} asChild>
                                                 <a
                                                     href={`#${link.id}`}

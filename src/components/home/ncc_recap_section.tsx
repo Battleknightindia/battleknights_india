@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Users, Eye, Trophy, Target, Globe } from "lucide-react";
+import { Users, Eye, Trophy, Globe } from "lucide-react";
 
 const NccRecapSection = () => {
     return (
