@@ -85,7 +85,7 @@ export default function Navbar() {
                 </Link>
 
                 {/* Desktop Navigation */}
-                <nav className="hidden md:flex items-center gap-1 bg-zinc-900/50 backdrop-blur-sm px-2 py-1.5 rounded-full border border-zinc-800/50">
+                <nav className="hidden xl:flex items-center gap-1 bg-zinc-900/50 backdrop-blur-sm px-2 py-1.5 rounded-full border border-zinc-800/50">
                     {navlinks.map((link) => (
                         <a
                             key={link.id}
@@ -110,7 +110,7 @@ export default function Navbar() {
                 <div className="flex items-center gap-3">
 
                     {/* Desktop Actions */}
-                    <div className="hidden md:flex items-center gap-3">
+                    <div className="hidden xl:flex items-center gap-3">
                         <Link href="/auth/login">
                             <Button variant="ghost" className="text-zinc-400 hover:text-white hover:bg-zinc-800">
                                 Login
@@ -127,7 +127,7 @@ export default function Navbar() {
                     {/* Mobile Menu Trigger */}
                     <Sheet>
                         <SheetTrigger asChild>
-                            <Button variant="outline" size="icon" className="md:hidden border-zinc-800 bg-zinc-900/50 text-white hover:bg-zinc-800">
+                            <Button variant="outline" size="icon" className="xl:hidden border-zinc-800 bg-zinc-900/50 text-white hover:bg-zinc-800">
                                 <Menu className="w-5 h-5" />
                             </Button>
                         </SheetTrigger>
@@ -141,9 +141,9 @@ export default function Navbar() {
                                     <span className="font-bold text-xl tracking-tight text-white">
                                         MENU
                                     </span>
-                                    <SheetClose asChild>
+                                    <SheetClose asChild className="">
                                         <Button variant="ghost" size="icon" className="text-zinc-400 hover:text-white">
-                                            <X className="w-6 h-6" />
+                                            <X className="w-6 h-6 hidden" />
                                         </Button>
                                     </SheetClose>
                                 </div>
