@@ -141,7 +141,7 @@ export default function Navbar() {
                                     <span className="font-bold text-xl tracking-tight text-white">
                                         MENU
                                     </span>
-                                    <SheetClose asChild className="">
+                                    <SheetClose asChild>
                                         <Button variant="ghost" size="icon" className="text-zinc-400 hover:text-white">
                                             <X className="w-6 h-6 hidden" />
                                         </Button>
