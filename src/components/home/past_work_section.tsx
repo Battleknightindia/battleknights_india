@@ -251,24 +251,24 @@ export default function PastWorkSection() {
                     </div>
 
                     {/* Immersive Category Switcher */}
-                    <div className="p-1.5 rounded-full bg-zinc-900/80 border border-zinc-800 backdrop-blur-xl flex items-center gap-1">
+                    <div className="p-1 md:p-1.5 rounded-full bg-zinc-900/80 border border-zinc-800 backdrop-blur-xl flex items-center gap-1">
                         <button
                             onClick={() => handleCategoryChange('major')}
-                            className={`relative px-6 py-2.5 rounded-full text-sm font-bold uppercase tracking-wider transition-all duration-300 ${activeCategory === 'major' ? 'text-white' : 'text-zinc-500 hover:text-zinc-300'}`}
+                            className={`relative px-3 py-2 md:px-6 md:py-2.5 rounded-full text-xs md:text-sm font-bold uppercase tracking-wider transition-all duration-300 ${activeCategory === 'major' ? 'text-white' : 'text-zinc-500 hover:text-zinc-300'}`}
                         >
                             {activeCategory === 'major' && (
                                 <motion.div layoutId="switcher-pill" className="absolute inset-0 bg-orange-600 rounded-full shadow-lg shadow-orange-900/50" />
                             )}
-                            <span className="relative z-10 flex items-center gap-2"><Sparkles className="w-4 h-4" /> Major Events</span>
+                            <span className="relative z-10 flex items-center gap-2"><Sparkles className="w-3 h-3 md:w-4 md:h-4" /> Major Events</span>
                         </button>
                         <button
                             onClick={() => handleCategoryChange('community')}
-                            className={`relative px-6 py-2.5 rounded-full text-sm font-bold uppercase tracking-wider transition-all duration-300 ${activeCategory === 'community' ? 'text-white' : 'text-zinc-500 hover:text-zinc-300'}`}
+                            className={`relative px-3 py-2 md:px-6 md:py-2.5 rounded-full text-xs md:text-sm font-bold uppercase tracking-wider transition-all duration-300 ${activeCategory === 'community' ? 'text-white' : 'text-zinc-500 hover:text-zinc-300'}`}
                         >
                             {activeCategory === 'community' && (
                                 <motion.div layoutId="switcher-pill" className="absolute inset-0 bg-blue-600 rounded-full shadow-lg shadow-blue-900/50" />
                             )}
-                            <span className="relative z-10 flex items-center gap-2"><Globe className="w-4 h-4" /> Community</span>
+                            <span className="relative z-10 flex items-center gap-2"><Globe className="w-3 h-3 md:w-4 md:h-4" /> Community</span>
                         </button>
                     </div>
                 </div>
@@ -312,7 +312,7 @@ export default function PastWorkSection() {
                                     </p>
                                 </div>
 
-                                <div className="h-32">
+                                <div className="h-52">
                                     <p className="text-zinc-400 leading-relaxed text-lg border-l-2 border-white/10 pl-6">
                                         {activeItem?.description}
                                     </p>
