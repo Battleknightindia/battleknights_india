@@ -1,14 +1,14 @@
 
 
-export const navlinkings = [
+export const navlinks = [
     { id: "1", href: "/", label: "Home" },
-    { id: "2", href: "/featured", label: "Featured Tournament" },
-    { id: "3", href: "/past-work", label: "Past Work" },
-    { id: "4", href: "/cosplay-gallery", label: "Cosplay Gallery" },
-    { id: "5", href: "/about", label: "About" },
+    { id: "2", href: "/features", label: "Features" },
+    { id: "3", href: "/upcoming", label: "Upcoming Tournament" },
+    { id: "4", href: "/past_works", label: "Past Work" },
+    { id: "5", href: "/cosplay_gallery", label: "Cosplay Gallery" },
 ];
 
-export const navlinks = [
+export const sectionlinks = [
     { id: "hero", label: "Home", href: "#hero" },
     { id: "features", label: "Features", href: "#features" },
     { id: "ncc-winners", label: "NCC Winners", href: "#ncc-winners" },

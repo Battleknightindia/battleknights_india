@@ -53,11 +53,16 @@ const htmlClasses = "h-screen w-full no-scrollbar overflow-y-auto";
 const bodyClasses = `bg-[#0F0F0F] text-white`;
 
 
-export default function RootLayout({ children }: RootLayoutProps) {
+import { createClient } from "@/lib/supabase/server";
+
+export default async function RootLayout({ children }: RootLayoutProps) {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+
   return (
     <html lang="en" className={htmlClasses} suppressHydrationWarning>
       <body className={bodyClasses}>
-        <NavBar />
+        <NavBar user={user} />
         {children}
         <Footer />
       </body>

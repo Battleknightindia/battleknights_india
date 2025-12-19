@@ -1,22 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
-import { MapPin, Gamepad2, User, Save, Loader2 } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import { MapPin, Gamepad2, User, Save, Loader2, Check } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
-// Define interface for the profile prop
-interface ProfileConfig {
-    fullName: string;
-    gameName: string;
-    gameId: string;
-    serverId: string;
-    roles: string[];
-    state: string;
-    city: string;
-    avatar_url: string;
-}
+import { updateProfile, ProfileConfig } from "@/lib/actions/profile-action";
+import { useRouter } from "next/navigation";
 
 interface ProfileEditFormProps {
     initialData: ProfileConfig;
@@ -26,8 +17,10 @@ interface ProfileEditFormProps {
 const AVAILABLE_ROLES = ["hyper", "marksmen", "tank", "mage", "fighter", "support"];
 
 export default function ProfileEditForm({ initialData, mode = "edit" }: ProfileEditFormProps) {
+    const router = useRouter();
     const [formData, setFormData] = useState<ProfileConfig>(initialData);
     const [isSaving, setIsSaving] = useState(false);
+    const [showSuccess, setShowSuccess] = useState(false);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -48,11 +41,26 @@ export default function ProfileEditForm({ initialData, mode = "edit" }: ProfileE
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsSaving(true);
-        // Simulate API call
-        await new Promise(resolve => setTimeout(resolve, 1500));
-        setIsSaving(false);
-        // In real app, would redirect or show success toast
-        alert(mode === "setup" ? "Profile created!" : "Profile saved!");
+
+        try {
+            const result = await updateProfile(formData);
+
+            if (result.error) {
+                alert(`Error: ${result.error}`);
+            } else {
+                setShowSuccess(true);
+                // Auto redirect after 2 seconds
+                setTimeout(() => {
+                    const targetPath = mode === "setup" ? "/" : "/profile";
+                    router.push(targetPath);
+                }, 2000);
+            }
+        } catch (error) {
+            console.error("Failed to update profile", error);
+            alert("An unexpected error occurred.");
+        } finally {
+            setIsSaving(false);
+        }
     };
 
     return (
@@ -93,7 +101,7 @@ export default function ProfileEditForm({ initialData, mode = "edit" }: ProfileE
                             <div className="flex items-center gap-6">
                                 <div className="h-20 w-20 rounded-2xl bg-zinc-800 border-2 border-zinc-700 relative overflow-hidden group cursor-pointer">
                                     <Image
-                                        src={formData.avatar_url.startsWith('/') ? formData.avatar_url : '/mock-avatar.png'}
+                                        src={formData.avatar_url || '/mock-avatar.png'}
                                         alt="Avatar"
                                         fill
                                         className="object-cover opacity-80 group-hover:opacity-100 transition-opacity"
@@ -231,9 +239,67 @@ export default function ProfileEditForm({ initialData, mode = "edit" }: ProfileE
                                 )}
                             </div>
 
+                            {/* Skip Button for Setup Mode */}
+                            {mode === "setup" && (
+                                <div className="text-center pt-2">
+                                    <Link
+                                        href="/"
+                                        className="text-sm font-medium text-zinc-500 hover:text-zinc-300 transition-colors"
+                                    >
+                                        Skip for now
+                                    </Link>
+                                </div>
+                            )}
+
                         </form>
                     </div>
                 </motion.div>
+
+                {/* Success Modal */}
+                <AnimatePresence>
+                    {showSuccess && (
+                        <>
+                            {/* Backdrop */}
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50"
+                            />
+                            {/* Modal */}
+                            <motion.div
+                                initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                                animate={{ opacity: 1, scale: 1, y: 0 }}
+                                exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                                className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none"
+                            >
+                                <div className="bg-zinc-900 border border-zinc-800 rounded-3xl p-8 max-w-sm w-full shadow-2xl flex flex-col items-center text-center pointer-events-auto relative overflow-hidden">
+                                    <div className="absolute top-0 right-0 w-[200px] h-[200px] bg-emerald-500/10 rounded-full blur-[60px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+
+                                    <div className="w-16 h-16 rounded-full bg-emerald-500/10 flex items-center justify-center mb-6 ring-1 ring-emerald-500/50">
+                                        <Check className="w-8 h-8 text-emerald-500" />
+                                    </div>
+
+                                    <h3 className="text-2xl font-black text-white mb-2">Success!</h3>
+                                    <p className="text-zinc-400 mb-8">
+                                        Your profile has been {mode === "setup" ? "created" : "updated"} successfully.
+                                    </p>
+
+                                    <div className="w-full h-1 bg-zinc-800 rounded-full overflow-hidden mb-2">
+                                        <motion.div
+                                            initial={{ width: "0%" }}
+                                            animate={{ width: "100%" }}
+                                            transition={{ duration: 2, ease: "linear" }}
+                                            className="h-full bg-emerald-500"
+                                        />
+                                    </div>
+                                    <p className="text-xs text-zinc-500 uppercase tracking-widest font-bold">Redirecting...</p>
+                                </div>
+                            </motion.div>
+                        </>
+                    )}
+                </AnimatePresence>
+
             </div>
         </section>
     );

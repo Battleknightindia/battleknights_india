@@ -110,7 +110,7 @@ const NccWinnerSection = () => {
                                     <div className={`absolute inset-0 bg-linear-to-t from-zinc-950 via-zinc-950/40 to-transparent opacity-90`} />
 
                                     {/* Color Accent Gradient */}
-                                    <div className={`absolute inset-0 bg-linear-to-t ${winner.color} opacity-0 group-hover:opacity-20 transition-opacity duration-500 mix-blend-overlay`} />
+                                    <div className={`absolute inset-0 opacity-0 transition-opacity duration-500 mix-blend-overlay`} />
                                 </div>
 
                                 {/* Content Overlay */}
@@ -128,21 +128,14 @@ const NccWinnerSection = () => {
                                             {winner.teamName}
                                         </h3>
 
-                                        <div className={`
-                                            px-4 py-1.5 rounded-full bg-linear-to-r ${winner.color} 
-                                            text-black text-xs font-bold uppercase tracking-widest shadow-lg
-                                        `}>
-                                            {winner.title}
-                                        </div>
-
                                         {/* Player List */}
-                                        <div className="flex flex-wrap justify-center gap-1.5 mt-2 opacity-80">
+                                        {/* <div className="hidden md:flex flex-wrap justify-center gap-1.5 mt-2 opacity-80">
                                             {winner.players.map((player, i) => (
                                                 <span key={i} className="text-[10px] font-bold px-2 py-0.5 bg-black/50 rounded border border-white/10 text-zinc-300">
                                                     {player}
                                                 </span>
                                             ))}
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
                             </div>

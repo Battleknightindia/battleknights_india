@@ -1,8 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { MapPin, Shield, Gamepad2, Award, User, Copy } from "lucide-react";
+import { MapPin, Shield, Gamepad2, Award, User, Copy, Edit2 } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 // Define interface for the profile prop
 interface ProfileConfig {
@@ -48,9 +50,22 @@ const ProfileView: React.FC<ProfileViewProps> = ({ profile }) => {
                     {/* Header: Identity Block */}
                     <div className="relative pt-12 pb-8 px-6 md:px-8 border-b border-zinc-800/50">
                         {/* Decorative Top-Right Badge */}
-                        <div className="absolute top-4 right-4 md:top-6 md:right-6 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-zinc-950/50 border border-zinc-800 backdrop-blur-sm">
-                            <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                            <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest leading-none">Online</span>
+                        <div className="absolute top-4 right-4 md:top-6 md:right-6 flex items-center gap-3">
+                            <Link href="/profile/edit">
+                                <Button variant="outline" size="sm" className="hidden md:flex bg-zinc-950/50 border-zinc-800 text-zinc-400 hover:text-white hover:bg-zinc-900">
+                                    <Edit2 className="w-3.5 h-3.5 mr-2" />
+                                    Edit Profile
+                                </Button>
+                                {/* Mobile Icon Only */}
+                                <Button variant="outline" size="icon" className="md:hidden h-8 w-8 bg-zinc-950/50 border-zinc-800 text-zinc-400 hover:text-white hover:bg-zinc-900 rounded-full">
+                                    <Edit2 className="w-3.5 h-3.5" />
+                                </Button>
+                            </Link>
+
+                            <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-zinc-950/50 border border-zinc-800 backdrop-blur-sm">
+                                <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                                <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest leading-none">Online</span>
+                            </div>
                         </div>
 
                         <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
@@ -58,7 +73,7 @@ const ProfileView: React.FC<ProfileViewProps> = ({ profile }) => {
                             <div className="relative shrink-0 group">
                                 <div className="h-28 w-28 md:h-32 md:w-32 rounded-3xl border-4 border-zinc-950 bg-zinc-800 shadow-2xl relative z-10 overflow-hidden ring-1 ring-white/5">
                                     <Image
-                                        src={profile.avatar_url.startsWith('/') ? profile.avatar_url : '/mock-avatar.png'}
+                                        src={profile.avatar_url || '/mock-avatar.png'}
                                         alt={profile.fullName}
                                         fill
                                         className="object-cover transition-transform duration-500 group-hover:scale-110"
